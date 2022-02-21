@@ -30,7 +30,6 @@ const useFetch = (URL = "", params = {}) =>{
 
 //add new user 
 const handleLoginAPI = (URL = "", data = {}) => {
-  // console.log(" bac sy la",data , "url la ",URL)
 
   axios.post(URL, data)
   .then(response =>

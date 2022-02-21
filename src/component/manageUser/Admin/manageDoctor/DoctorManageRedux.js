@@ -62,23 +62,27 @@ const DoctorManageRedux = () => {
     //handle save content markdown
     const handleSaveContentMarkdown = () =>{
         if (HaveOldData === false) {
-            createNewPost(state);
-            console.log("trang thai la ",HaveOldData ) 
-            console.log("nguoi duoc chon la ",state)
-
+            try {
+                createNewPost(state);
+            } catch (error) {
+                toast.error("Không thể thêm mới thông tin vui lòng kiểm tra lại !")
+            }
         }else if(HaveOldData === true){           
-             console.log("trang thai la ",HaveOldData )
-
-            // editMarkdown(url_MarkDown,state);
-            toast.success("Cập nhật thông tin thành công !")
-            console.log(" nguoi dc chon chinh sua la ",state)
+            try {
+                editMarkdown(url_MarkDown,state);
+                toast.success("Cập nhật thông tin thành công !")
+            } catch (error) {
+                toast.error("Không thể sửa thông tin vui lòng kiểm tra lại !")
+            }
         }  
     }
 
     const createNewPost = async (data) =>{                                                                                                                                                         
         try {
-          await handleLoginAPI(url_MarkDown,data);
+           handleLoginAPI(url_MarkDown,data);
           toast.success("Thêm thông tin thành công !")
+          setHaveOldData(true);
+
         } catch (error) {
             console.log(error)
         }
