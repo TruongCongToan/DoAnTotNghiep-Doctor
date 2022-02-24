@@ -1,4 +1,6 @@
 import {ADD_USER_LOGIN,LOG_OUT} from '../constant';
+
+
 const initialState = {
     language:'vi',
     user:[],
@@ -6,6 +8,7 @@ const initialState = {
     role:''
 
 }
+
 const loginedUser =(state =initialState, action) => {
     switch(action.type){
         case ADD_USER_LOGIN:
@@ -18,14 +21,16 @@ const loginedUser =(state =initialState, action) => {
                     language:'vi',
                     role:'admin'
                 }
-            }  
+            } else
+           {
             return {
-              ...state,
-              user: action.payload,
-              loggedIn:true,
-              language:'vi',
-              role:'user'
-          }
+                ...state,
+                user: action.payload,
+                loggedIn:true,
+                language:'vi',
+                role:'user'
+            }
+           }
         }
        
     
@@ -34,7 +39,8 @@ const loginedUser =(state =initialState, action) => {
             return {
                 ...state,
                 user: {},
-                loggedIn: false
+                loggedIn: false,
+                role:''
             }
          }
      default:

@@ -9,7 +9,7 @@ import { useSelector,useDispatch } from 'react-redux';
 import allAction from '../../../redux/actions/allAction';
 import { useFetch ,editUser} from '../../CustomHooks/useFetch';
 
-const Header = () => {
+const DoctorHeader = () => {
     const history = useHistory()
     const dispatch = useDispatch()
 
@@ -81,7 +81,7 @@ const Header = () => {
     //function usermanager redux
     const handleManageUserRedux = () =>{
 
-            history.push('/manager-users-redux')
+            history.push('/manage-users')
 
     }
 
@@ -126,7 +126,9 @@ const Header = () => {
                             Quản lý thông tin bác sỹ
                             </DropdownItem>
                           
-                           
+                            <DropdownItem onClick={() =>{handleManageDoctor()}}>
+                            Quản lý kế hoạch khám bệnh
+                            </DropdownItem>
                         </DropdownMenu>
                         </UncontrolledDropdown>
 
@@ -199,4 +201,4 @@ const Header = () => {
     )
 }
 
-export default Header
+export default DoctorHeader

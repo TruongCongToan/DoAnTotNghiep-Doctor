@@ -1,7 +1,7 @@
 import React,{useState,useEffect, Fragment}  from 'react'
 import './UserManagerRedux.css'
 import { useFetch ,handleLoginAPI,deleteUser,editUser} from '../../CustomHooks/useFetch'
-import Header from '../Header/Header'
+import Header from '../Header/AdminHeader'
 import { useSelector,useDispatch } from 'react-redux';
 import allAction from '../../../redux/actions/allAction';
 import Lightbox from 'react-image-lightbox';
@@ -74,6 +74,7 @@ const UserManagerRedux = () => {
     const redux_user_Admin=useSelector(state=>state.admin);
 
     const redux_user_Doctors=useSelector(state=>state.doctor);
+    
     // console.log("api data thu duioc la :" ,redux_user_Doctors.listOutStandingDoctors) 
 
      const [previewImgURL, setpreviewImgURL] = useState('');
@@ -262,7 +263,7 @@ const UserManagerRedux = () => {
              <Header/>
             <div className='user-manager-redux-title'>
             
-                Quản lý người dùng Redux
+                Quản lý người dùng 
             </div>
             <div className='user-manager-redux-body'>
          

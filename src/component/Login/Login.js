@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 
 import '../Login/Login.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -9,6 +9,7 @@ import {useFetch, editUser} from '../CustomHooks/useFetch'
 import { useHistory} from 'react-router-dom';
 import { useSelector,useDispatch } from 'react-redux';
 import allAction from '../../redux/actions/allAction';
+import LoadingPage from '../CustomHooks/LoadingPage/LoadingPage';
 
 
 const Login = () => {
@@ -17,7 +18,8 @@ const Login = () => {
     const [passWord, setPassWord] = useState('');
     const [isShowPassword, setisShowPassword] = useState(false);  
     const [errorMessage, setErrorMessage] = useState('');
-   
+    const [isLoading, setisLoading] = useState(false)
+
     const history = useHistory();
 
     var url='https://api-truongcongtoan.herokuapp.com/api/users';
@@ -27,8 +29,9 @@ const Login = () => {
     const {data:admin} = useFetch(url_Admin);
     
     //connect voi redux , lay ra du lieu
-    const currentUser = useSelector(state => state.loginedUser);
-    // console.log("user redux :",currentUser)
+    // const currentUser = useSelector(state => state.loginedUser);
+
+    
     const user = {
       username:'toan',
       password:'123',
@@ -52,10 +55,8 @@ const Login = () => {
       try {
           let response = await editUser(url,data);
    console.log("response" , response)
-  
-          
+
       } catch (error) {
-          // alert("username bạn vừa nhập đã có trong danh sách. Bạn vui lòng thực hiện lại !")
           console.log(error)
       }
   }
@@ -76,27 +77,18 @@ const Login = () => {
             setErrorMessage("Tên đăng nhập hoặc mật khẩu không chính xác")
           }else{
             dispatch(allAction.loginUser.addUser(admin[0]));
-            checkLoggedin(url_Admin,admin[0]);
+            // checkLoggedin(url_Admin,admin[0]);
+            
           }
-          history.push("/manager-users-redux")
+          history.push("/manage-users")
           console.log("dang nhap bang admin ");
 
         }else{
           
-       data.map(item =>{
-         if (item.username === userName && item.password !== passWord) {
-          
-          setErrorMessage("Sai mật khẩu")
-         } else if (item.username !== userName && item.password === passWord) {
-          setErrorMessage("Tên đăng nhập không chính xác")
-
-        }else if  (item.username !== userName && item.password !== passWord) {
-          
-          setErrorMessage("Tên đăng nhập hoặc mật khẩu không chính xác")
-        }else{
-          
-
-          user.username= item.username;
+          data.map(item =>{
+            if (item.username === userName && item.password === passWord ) {
+            history.push("manage-users")
+            user.username= item.username;
             user.email=item.email;
             user.password=item.password;
             user.phonenumber=item.phonenumber;
@@ -112,17 +104,15 @@ const Login = () => {
             checkLoggedin(url,user);
 
             console.log("dang nhap bang user");
+            history.push("/manage-users")
 
           // console.log("gia tri thu duoc la ", user)
-
-          // dispatch(allAction.userAction.addUser({
-          //   username:userName,
-          //   password:passWord,
-          // }));
-        //  history.push("/")
-        }      
-       });
-      }
+            }else{
+              setErrorMessage("Tên đăng nhập hoặc mật khẩu không chính xác");
+              console.log("dang nhap bang user khong chinh xac");
+            }
+          })
+    }
     
     }
   
@@ -130,13 +120,23 @@ const Login = () => {
       const handleShowHidePassword =() =>{
         setisShowPassword(!isShowPassword);
       }
-       
     
+      useEffect(() => {
+        if (data) {
+            // dispatch(allAction.adminAction.addUserByAdmin(userList))
+            setisLoading(true);
+        }
+
+    }, [data]);
+
     return (
         <div className ="login-background">
-            <div className = "login-container">
-            {/* them chu row de dung bootstrap ben duoi*/ }
-              <div className ="login-content row "> 
+          
+             {
+               isLoading?
+              <React.Fragment>
+                  <div className = "login-container">
+             <div className ="login-content row "> 
                 <div className ="col-12 text-login">Đăng nhập</div>
                 <div className="col-12 form-group login-input">
                     <label className="lb-username">Tên đăng nhập:</label>
@@ -185,10 +185,12 @@ const Login = () => {
                   <i className="fab fa-facebook-f facebook" />                
                 </div>
               </div>
+              </div>
+              </React.Fragment> 
+              :<LoadingPage/>
+              }
             </div>
-           
-        </div>
-        
+                
     );
 }
 

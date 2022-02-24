@@ -38,7 +38,7 @@ const App =() => {
                    <Route path={path.LOGIN}  component={Login}/>
                   <Route path={path.HOME} exact component={Home}/>
                   {/* <Route path={path.MANAGE_USER} component={UserManage}/> */}
-                  <Route path={path.MANAGE_USER_REDUX} component={UserManagerRedux}/>
+                  <Route path={path.MANAGE_USER} component={UserManagerRedux}/>
                   <Route path={path.MANAGE_DOCTOR_REDUX} component={DoctorManageRedux}/>
                   <Route path={path.LOADING} component={LoadingPage}/>
                   <Route path={path.LOGIN_GOOGLE} component={LoginGoogle}/>

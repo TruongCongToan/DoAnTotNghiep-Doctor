@@ -1,10 +1,13 @@
 .doctor-detail-container{
     height: 100%;
-    margin: 0 100px;
+    /* margin: 0 100px; */
+
 }
 .intro-doctor{
     display: flex;
     padding-top: 15px;
+    padding: 10px 100px;
+
     /* height: 120px; */
 }
 .intro-doctor .content-left{
@@ -24,11 +27,12 @@
     padding-left: 10px;
 }
 .up{
-    font-size: 20px;
+    font-size: 15px;
     font-weight: 600;
 }
 .down{
     padding-top: 5px;
+    font-size: 13px;
 }
 .comment-doctor{
     height: 10px;
@@ -46,4 +50,26 @@
 }
 .create-content-doctor:hover{
     opacity: 0.9;
+}
+.chi-tiet-doctor{
+    background-color: #f9f9f9;
+    margin-bottom: 15px;
+    margin-top: 10px;
+    padding: 10px 100px;
+    border: 1px solid #ddd;
+
+}
+.chi-tiet-doctor p{
+  font-size: 15px;
+
+}
+.chi-tiet-doctor ul, ol {
+    margin: 10px 0px 10px 25px;
+
+}
+.chi-tiet-doctor li{
+    font-size: 13px;
+}
+.chi-tiet-doctor img{
+    width: 100%;
 }
