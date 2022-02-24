@@ -15,62 +15,16 @@ const Header = () => {
 
     const currentUser = useSelector(state => state.loginedUser);
 
-    // console.log("user lay tu redux la ",currentUser)
-
-    //goi api lay data 
-    var url_Users="https://api-truongcongtoan.herokuapp.com/api/users";
-    var url_Admin = 'https://api-truongcongtoan.herokuapp.com/api/admin';    
-
-    // const {data:userData}= useFetch(url_Users);
-
-    const user = {
-        username:'toan',
-        password:'123',
-        email:'123',
-        address:'123',
-        gender:'123',
-  
-      };
+    console.log("user lay tu redux la ",currentUser)
 
     const redirectHome =() =>{
 
         history.push("/")
     }
 
-    //lout user
-    const checkLogOut =async (data) =>{                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
-        try {
-            if (data.username === "admin") {
-              await editUser(url_Admin,data);
-             
-            }else{
-            await editUser(url_Users,data);
-           
-            }
-  
-        } catch (error) {
-            // alert("username bạn vừa nhập đã có trong danh sách. Bạn vui lòng thực hiện lại !")
-            console.log(error)
-        }
-    }
-
     //function logout
     const handleLogOut = () =>{
-        // history.push("/login")
-        // user.username= currentUser.user.username;
-        // user.email=currentUser.user.email;
-        // user.password=currentUser.user.password;
-        // user.phonenumber=currentUser.user.phonenumber;
-        // user.gender=currentUser.user.gender;
-        // user.position=currentUser.user.position;
-        // user.role=currentUser.user.role;
-        // user.address=currentUser.user.address;
-        // user.image= currentUser.user.image;
-        // user.action = currentUser.user.action;
-        // user.active = 0;
-
-        // checkLogOut(user);
-
+    
         dispatch(allAction.loginUser.logOut());
         history.push('/login')
     }
@@ -83,14 +37,16 @@ const Header = () => {
     const handleManageUserRedux = () =>{
 
             history.push('/manage-users')
-
     }
 
     const handleManageDoctor = () =>{
         history.push('/manager-doctors-redux')
 
     }
+    const handleManageSchedule = () =>{
+        history.push('/manage-schedule')
 
+    }
     return (
         <div className='header-container'>
             <div className='header-title'>
@@ -127,7 +83,7 @@ const Header = () => {
                             Quản lý thông tin bác sỹ
                             </DropdownItem>
                           
-                            <DropdownItem onClick={() =>{handleManageDoctor()}}>
+                            <DropdownItem onClick={() =>{handleManageSchedule()}}>
                             Quản lý kế hoạch khám bệnh
                             </DropdownItem>
                         </DropdownMenu>
@@ -193,7 +149,7 @@ const Header = () => {
         </div>
   
             <div className='header-logout'>
-            <span className='welcome'>Xin chào : {currentUser&& currentUser.user.username ?currentUser.user.username:''}</span>
+            <span className='welcome'>Xin chào : {currentUser&& currentUser.user.hovaten ?currentUser.user.hovaten:''}</span>
                 <button className='btn-logout'onClick={() =>handleLogOut()}  title='Đăng xuất'>
                 <i className="fas fa-sign-out-alt"></i>
                 </button>

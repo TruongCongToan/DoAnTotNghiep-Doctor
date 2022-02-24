@@ -14,6 +14,11 @@ export const ADD_ALL_DOCTORS = 'ADD_ALL_DOCTORS';
 export const ADD_OUTSTANDING_DOCTORS ='ADD_OUTSTANDING_DOCTORS';
 
 export const GET_DETAIL_DOCTOR = 'GET_DETAIL_DOCTOR';
+export const USER_ROLE={
+    ADMIN:'R1',
+    DOCTOR:'R2',
+    PATIENT:'R3'
+}
 
 export const CRUD_ACTION  = {
     CREATE:"CREATE",

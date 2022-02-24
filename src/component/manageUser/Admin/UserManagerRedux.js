@@ -1,7 +1,8 @@
 import React,{useState,useEffect, Fragment}  from 'react'
 import './UserManagerRedux.css'
 import { useFetch ,handleLoginAPI,deleteUser,editUser} from '../../CustomHooks/useFetch'
-import Header from '../Header/AdminHeader'
+import AdminHeader from '../Header/AdminHeader';
+import DoctorHeader from '../Header/DoctorHeader';
 import { useSelector,useDispatch } from 'react-redux';
 import allAction from '../../../redux/actions/allAction';
 import Lightbox from 'react-image-lightbox';
@@ -13,7 +14,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import ModalUser from './modalUser';
 
-import {CRUD_ACTION } from '../../../redux/constant'
+import {CRUD_ACTION, USER_ROLE } from '../../../redux/constant'
 
 import LoadingPage from '../../CustomHooks/LoadingPage/LoadingPage';
 
@@ -75,7 +76,10 @@ const UserManagerRedux = () => {
 
     const redux_user_Doctors=useSelector(state=>state.doctor);
     
-    // console.log("api data thu duioc la :" ,redux_user_Doctors.listOutStandingDoctors) 
+    
+    const redux_user_loginedUser=useSelector(state=>state.loginedUser);
+
+    console.log("api data thu duioc la :" ,redux_user_loginedUser) 
 
      const [previewImgURL, setpreviewImgURL] = useState('');
      const [isOpen, setisOpen] = useState(false);
@@ -243,6 +247,22 @@ const UserManagerRedux = () => {
           };
         });
       };
+
+      const checkUserRole = () =>{
+          if (redux_user_loginedUser && redux_user_loginedUser.user&&redux_user_loginedUser.user.role) {
+                let role = redux_user_loginedUser.user.role;
+                if (role === USER_ROLE.ADMIN) {
+                    console.log("admin")
+                    return <AdminHeader/>
+                }else if(role === USER_ROLE.DOCTOR){
+                    console.log("doctor");
+                    return <DoctorHeader/>
+                }else{
+                    console.log("patient")
+                    return <AdminHeader/>
+                }
+          }
+      }
       
     return (
    
@@ -258,9 +278,10 @@ const UserManagerRedux = () => {
              userList ={userList}
              redux_AllCode = {redux_AllCode}
              />
-                
-
-             <Header/>
+            {
+            checkUserRole()
+            }
+           
             <div className='user-manager-redux-title'>
             
                 Quản lý người dùng 

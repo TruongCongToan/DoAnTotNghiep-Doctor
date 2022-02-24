@@ -64,44 +64,44 @@ const Login = () => {
       //function login ; neu function la bat dong bo thi se su dung async
       const handleLogin = async  () =>{
     
-        if (userName === "admin") {
+        // if (userName === "admin") {
            
-          if (admin[0].username === userName && admin[0].password !== passWord) {
+        //   if (admin[0].username === userName && admin[0].password !== passWord) {
         
-            setErrorMessage("Sai mật khẩu")
-           } else if (admin[0].username !== userName && admin[0].password === passWord) {
-            setErrorMessage("Tên đăng nhập không chính xác")
+        //     setErrorMessage("Sai mật khẩu")
+        //    } else if (admin[0].username !== userName && admin[0].password === passWord) {
+        //     setErrorMessage("Tên đăng nhập không chính xác")
   
-          }else if  (admin[0].username !== userName && admin[0].password !== passWord) {
+        //   }else if  (admin[0].username !== userName && admin[0].password !== passWord) {
             
-            setErrorMessage("Tên đăng nhập hoặc mật khẩu không chính xác")
-          }else{
-            dispatch(allAction.loginUser.addUser(admin[0]));
-            // checkLoggedin(url_Admin,admin[0]);
+        //     setErrorMessage("Tên đăng nhập hoặc mật khẩu không chính xác")
+        //   }else{
+        //     dispatch(allAction.loginUser.addUser(admin[0]));
+        //     // checkLoggedin(url_Admin,admin[0]);
             
-          }
-          history.push("/manage-users")
-          console.log("dang nhap bang admin ");
+        //   }
+        //   history.push("/manage-users")
+        //   console.log("dang nhap bang admin ");
 
-        }else{
+        // }else{
           
           data.map(item =>{
             if (item.username === userName && item.password === passWord ) {
-            history.push("manage-users")
-            user.username= item.username;
-            user.email=item.email;
-            user.password=item.password;
-            user.phonenumber=item.phonenumber;
-            user.gender=item.gender;
-            user.position=item.position;
-            user.role=item.role;
-            user.address=item.address;
-            user.image= item.image;
-            user.action = item.action;
-            user.active = 1;
+            // history.push("manage-users")
+            // user.username= item.username;
+            // user.email=item.email;
+            // user.password=item.password;
+            // user.phonenumber=item.phonenumber;
+            // user.gender=item.gender;
+            // user.position=item.position;
+            // user.role=item.role;
+            // user.address=item.address;
+            // user.image= item.image;
+            // user.action = item.action;
+            // user.active = 1;
   
-            dispatch(allAction.loginUser.addUser(user));
-            checkLoggedin(url,user);
+            dispatch(allAction.loginUser.addUser(item));
+            // checkLoggedin(url,user);
 
             console.log("dang nhap bang user");
             history.push("/manage-users")
@@ -109,12 +109,12 @@ const Login = () => {
           // console.log("gia tri thu duoc la ", user)
             }else{
               setErrorMessage("Tên đăng nhập hoặc mật khẩu không chính xác");
-              console.log("dang nhap bang user khong chinh xac");
+              console.log("k dang nhap bang user");
             }
           })
     }
     
-    }
+    
   
    //function an/hien password
       const handleShowHidePassword =() =>{
