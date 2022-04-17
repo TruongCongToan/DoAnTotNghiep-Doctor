@@ -40,7 +40,6 @@ const App =() => {
                   <Route path={path.LOGIN_GOOGLE} component={LoginGoogle}/>
                   <Route path={path.DETAIL_DOCTOR} component={DetailDoctor}/>
                   <Route path={path.MANAGE_SCHEDULE} component={ManageSchedule}/>
-
                  {/* <Redirect to = {linkToDirect}/>  */}
     
                 </Router>

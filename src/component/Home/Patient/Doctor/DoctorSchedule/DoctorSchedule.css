@@ -1,0 +1,29 @@
+.doctor-schedule-container{
+    border: 1px solid rebeccapurple;
+}
+.all-schedule{
+
+}
+
+.all-available-time{
+
+}
+.text-calendar{
+    color: #333;
+    margin: 10px 0;
+}
+.text-calendar span{
+    text-transform: uppercase;
+    margin-left: 5px;
+}
+.time-content{
+display: flex;
+gap: 15px;
+flex-wrap: wrap;
+}
+.time-conten button{
+    padding: 5px 10px;
+    border: none;
+    outline: none;
+    background-color: gray;
+}

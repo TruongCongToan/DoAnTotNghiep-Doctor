@@ -7,7 +7,6 @@ import { useHistory} from 'react-router-dom';
 import { useSelector,useDispatch } from 'react-redux';
 
 import allAction from '../../../redux/actions/allAction';
-import { useFetch ,editUser} from '../../CustomHooks/useFetch';
 
 const Header = () => {
     const history = useHistory()
@@ -15,7 +14,7 @@ const Header = () => {
 
     const currentUser = useSelector(state => state.loginedUser);
 
-    console.log("user lay tu redux la ",currentUser)
+    // console.log("user lay tu redux la ",currentUser)
 
     const redirectHome =() =>{
 

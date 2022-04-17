@@ -37,6 +37,8 @@ const TableManagerUser = (props) => {
             toast.success("Đã xóa người dùng !");
             dispatch(allAction.adminAction.addUserByAdmin(props.userList));
             props.removeUser(input);
+            window.location.reload(); 
+
           }
     }
 

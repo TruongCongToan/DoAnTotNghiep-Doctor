@@ -26,16 +26,18 @@ const UserManagerRedux = () => {
     var url_Roles= 'https://api-truongcongtoan.herokuapp.com/api/allcode/role';
     var url_Users="https://api-truongcongtoan.herokuapp.com/api/users";
     var url_OutStandingDoctor = "https://api-truongcongtoan.herokuapp.com/api/users/0/6";
+    var url_doctor = 'https://api-truongcongtoan.herokuapp.com/api/users/doctors'; 
+
     //fetch data 
     const { data:gender } = useFetch(url_Gender);
     const {data:position} = useFetch(url_Position);
     const {data:role} = useFetch(url_Roles);
     const {data:userList} = useFetch(url_Users);
     const {data:outstandingDoctor} = useFetch(url_OutStandingDoctor);
+    const { data:doctors } = useFetch(url_doctor);
+
     //truyen data len redux
     const dispatch = useDispatch();
-
-
     //object de luu vao redux
     const allCode ={
         gender:[],
@@ -73,13 +75,10 @@ const UserManagerRedux = () => {
     const redux_AllCode = useSelector(state => state.allCode);
 
     const redux_user_Admin=useSelector(state=>state.admin);
-
-    const redux_user_Doctors=useSelector(state=>state.doctor);
-    
-    
+ 
     const redux_user_loginedUser=useSelector(state=>state.loginedUser);
 
-    console.log("api data thu duioc la :" ,redux_user_loginedUser) 
+
 
      const [previewImgURL, setpreviewImgURL] = useState('');
      const [isOpen, setisOpen] = useState(false);
@@ -112,19 +111,23 @@ const UserManagerRedux = () => {
             // dispatch(allAction.adminAction.addUserByAdmin(userList));
         }, [gender,role,position]);
 
-  
+        const doctorssss = useSelector(state => state.doctor)
+        console.log("doctors list la  ", doctors)
+        console.log("userlist la ", userList)
+
+
         useEffect(() => {
-            if (userList) {
+            if (userList && doctors && outstandingDoctor) {
                 dispatch(allAction.adminAction.addUserByAdmin(userList));
+                
+                dispatch(allAction.addAllDoctor.addAllDoctor(doctors));
+                dispatch(allAction.addOutStandingDoctors.addOutStandingDoctors(outstandingDoctor));
+
                 setloading(true);
             }
 
-        }, [userList]);
-        useEffect(() => {
-          if (outstandingDoctor) {
-            dispatch(allAction.addOutStandingDoctors.addOutStandingDoctors(outstandingDoctor));
-          }
-        }, [outstandingDoctor])
+        }, [userList,doctors,outstandingDoctor]);
+      
         //onchange input
     const onChangeInput = (event,id) =>{
 
@@ -252,13 +255,13 @@ const UserManagerRedux = () => {
           if (redux_user_loginedUser && redux_user_loginedUser.user&&redux_user_loginedUser.user.role) {
                 let role = redux_user_loginedUser.user.role;
                 if (role === USER_ROLE.ADMIN) {
-                    console.log("admin")
+                    // console.log("admin")
                     return <AdminHeader/>
                 }else if(role === USER_ROLE.DOCTOR){
-                    console.log("doctor");
+                    // console.log("doctor");
                     return <DoctorHeader/>
                 }else{
-                    console.log("patient")
+                    // console.log("patient")
                     return <AdminHeader/>
                 }
           }
@@ -268,7 +271,7 @@ const UserManagerRedux = () => {
    
         <div className='user-redux-container'>    
         {
-            loading?
+            // loading?
 
             <React.Fragment>
             <ModalUser
@@ -276,6 +279,7 @@ const UserManagerRedux = () => {
              toggleCloseModel = {toggleUserModal}
             //  createNewUser ={handleSave}
              userList ={userList}
+             doctors={doctors}
              redux_AllCode = {redux_AllCode}
              />
             {
@@ -298,21 +302,24 @@ const UserManagerRedux = () => {
                         <i className="fas fa-plus"></i>Thêm người dùng</button>
                 </div>
 
-                <div className='row'>
+                    <div className='row'>
 
                     <div className='col-12'>
-                
-                        <TableManagerUser 
+                  
+                      { 
+                      loading?
+                       <TableManagerUser 
                           removeUser = {removeUser} 
                           userList = {userList}  
                           editOneUser = {updateUser}
                           action={state.action}
                          
-                          /> 
+                          />   :<span style={{display:'flex',justifyContent:'center'}}>Đang tải dữ liệu bảng ...</span> }
                       
                      </div>
                 
-                </div>
+             
+              </div>
             </div>
             
 
@@ -349,7 +356,7 @@ const UserManagerRedux = () => {
             theme='colored'
         />
             </React.Fragment>
-            :<LoadingPage/>
+            // :<LoadingPage/>
         }
         </div>
 

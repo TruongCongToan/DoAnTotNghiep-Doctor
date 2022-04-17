@@ -8,5 +8,5 @@ export const path = {
     LOADING:'/loading',
     LOGIN_GOOGLE:'/login-with-google',
     DETAIL_DOCTOR:'/detail-doctor/:id',
-    MANAGE_SCHEDULE:'/manage-schedule'
+    MANAGE_SCHEDULE:'/manage-schedule',
 };

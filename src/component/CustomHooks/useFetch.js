@@ -31,16 +31,16 @@ const useFetch = (URL = "", params = {}) =>{
 //add new user 
 const handleLoginAPI = (URL = "", data = {}) => {
 
+  // console.log("du lieu nhanh duoc la ",data)
   axios.post(URL, data)
   .then(response =>
     console.log(response)
     );
-
-  // return axios.post(URL, data);
 };
-
+// const addSchedule =()
 //delete user
 const deleteUser = (URL = "",username) =>{
+  console.log("url la ",URL);
   return axios.delete(URL+'/'+username);
 }
 //sua user
@@ -57,5 +57,25 @@ const getDetailInforDoctor = async (inputId) =>{
   let url = `https://api-truongcongtoan.herokuapp.com/api/markdowns/${inputId}`;
   return  axios.get(url);  
 }
+//get schedule by doctorid
+const getScheduleByDoctorid = async (inputId) =>{
+  let url = `https://api-truongcongtoan.herokuapp.com/api/schedules/${inputId}`;
+  // console.log(url)
+  return  axios.get(url);  
+}
 
-export  {useFetch,handleLoginAPI,deleteUser,editUser,editMarkdown,getDetailInforDoctor};
+//delete time schedule 
+const deleteSchedule = (doctorid,date,timetype) =>{
+  let url = `https://api-truongcongtoan.herokuapp.com/api/schedules/${doctorid}/${date}/${timetype}`;
+  console.log("url la ",url)
+  return axios.delete(url);
+}
+//get schedule by doctorid and date
+const getSchedulebyDate = async (doctorid,date) =>{
+  let url = `https://api-truongcongtoan.herokuapp.com/api/schedules/${doctorid}/${date}`;
+  return axios.get(url);
+}
+
+export  {useFetch,handleLoginAPI,deleteUser,editUser
+  ,editMarkdown,getDetailInforDoctor,getScheduleByDoctorid
+  ,deleteSchedule,getSchedulebyDate};

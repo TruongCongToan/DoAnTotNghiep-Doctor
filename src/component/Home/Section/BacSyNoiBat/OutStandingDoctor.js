@@ -16,7 +16,7 @@ const OutStandingDoctor = (props) => {
 
   const [isLoading,setIsLoading] = useState(false);
  
-  console.log("du lieu thu duoc la ", doctorData)
+  // console.log("du lieu thu duoc la ", doctorData)
   //format position
 const formatPosition = (positionKey) =>{
       if (!positionKey) {

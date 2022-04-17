@@ -25,7 +25,6 @@ const options = [
     { value: 'vanilla', label: 'Vanilla' },
 ];
 const url_MarkDown = 'https://api-truongcongtoan.herokuapp.com/api/markdowns/';
-const url_doctor = 'https://api-truongcongtoan.herokuapp.com/api/users/doctors'; 
 
 const DoctorManageRedux = () => {
 
@@ -55,8 +54,10 @@ const DoctorManageRedux = () => {
     });
 
     //fetch data doctor 
-    const { data:doctors } = useFetch(url_doctor);
-    
+    // const { data:doctors } = useFetch(url_doctor);
+    const redux_user_Doctors=useSelector(state=>state.doctor);
+    // const redux_user_Admin=useSelector(state=>state.admin);
+
     const [isOK, setIOK] = useState(false)
 
     //handle save content markdown
@@ -143,13 +144,12 @@ const handleEditorChange = ({ html, text }) =>{
     setContentHTML(html);
   }
 
-  const redux_user_Admin=useSelector(state=>state.admin);
 
   useEffect(() => {
-  if ( doctors&&doctors.length>0) {
-    for (let i = 0; i < doctors.length; i++) {
-        listDoctors.push(buildDataInput(doctors[i]));   
-        listfullDoctors.push(doctors[i])
+  if ( redux_user_Doctors.listDoctors&&redux_user_Doctors.listDoctors.length>0) {
+    for (let i = 0; i < redux_user_Doctors.listDoctors.length; i++) {
+        listDoctors.push(buildDataInput(redux_user_Doctors.listDoctors[i]));   
+        listfullDoctors.push(redux_user_Doctors.listDoctors[i])
     }
   }
   let obj = listfullDoctors.find(o => o.hovaten === selectedDoctor.label);
@@ -166,17 +166,7 @@ const handleEditorChange = ({ html, text }) =>{
         // selectedDoctor:selectedDoctor,
         markdown_id:selectedDoctor.value
     });
-    
- 
-
   }, [contentMarkDown,description]);
-
-  useEffect(() => {
-    if (doctors) {
-        setloading(true);
-    }
-
-}, [doctors]);
 
   const buildDataInput = (inputData) =>{
     let object  = {};
@@ -194,7 +184,7 @@ const handleEditorChange = ({ html, text }) =>{
     return (
        <React.Fragment>
           {
-               loading ?
+            //    loading ?
             <React.Fragment>
             <Header/>
             <div className='manage-doctor-container'>
@@ -270,7 +260,7 @@ const handleEditorChange = ({ html, text }) =>{
            theme='colored'
        />
        </React.Fragment>
-       :<LoadingPage/>
+    //    :<LoadingPage/>
           }
        </React.Fragment>
     )

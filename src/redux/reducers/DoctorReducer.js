@@ -1,9 +1,10 @@
-import {ADD_ALL_DOCTORS,ADD_OUTSTANDING_DOCTORS} from '../constant'
+import {ADD_ALL_DOCTORS,ADD_OUTSTANDING_DOCTORS, ADD_SELECTED_DOCTOR} from '../constant'
 
 const initialState = {
   
     listDoctors:[],
-    listOutStandingDoctors:[]
+    listOutStandingDoctors:[],
+    selectedDotor:{}
 
 }
 const DoctorReducer=(state =initialState, action) => {
@@ -24,7 +25,13 @@ const DoctorReducer=(state =initialState, action) => {
             
           }
         }
-        
+        case ADD_SELECTED_DOCTOR:
+          { return {
+              ...state,
+            selectedDotor:action.payload,
+            
+          }
+        }
         
         
      default:

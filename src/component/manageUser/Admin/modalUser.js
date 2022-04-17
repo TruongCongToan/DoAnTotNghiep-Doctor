@@ -74,7 +74,7 @@ const ModalUser = (props) => {
             if (redux_user_Admin.user.action === "CREATE") {
             }
             else{
-                console.log("du lieu thu duoc tu api ",redux_user_Admin.user)
+                // console.log("du lieu thu duoc tu api ",redux_user_Admin.user)
                 setpreviewImgURL(redux_user_Admin.user.image)
                    setstate({
                     email:redux_user_Admin.user.email,
@@ -145,7 +145,8 @@ const ModalUser = (props) => {
                     setpreviewImgURL('')
                     toast.success("Thêm người dùng thành công !");
                     toggle();
-                    
+                    // window.location.reload(); 
+                    setTimeout(() => window.location.reload(), 2000); 
                 }
             }
             if (action === CRUD_ACTION.EDIT) {
@@ -185,13 +186,19 @@ const ModalUser = (props) => {
         
                     setpreviewImgURL('')
                     toast.success("Cập nhật người dùng thành công !");
+                    
                     toggle();
+                    // window.location.reload(); 
+                    setTimeout(() => window.location.reload(), 2000);
+
+
                 }
             }
         } catch (error) {
             // toast.error("Username này đã tồn tại!");
             console.log(error)
         }
+
     }
     const resetState = () =>{
         setstate({

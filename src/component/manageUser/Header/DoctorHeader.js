@@ -141,7 +141,7 @@ const DoctorHeader = () => {
         </div>
   
             <div className='header-logout'>
-            <span className='welcome'>Xin chào : {currentUser&& currentUser.user.username ?currentUser.user.username:''}</span>
+            <span className='welcome'>Xin chào : {currentUser&& currentUser.user.hovaten ?currentUser.user.hovaten:''}</span>
                 <button className='btn-logout'onClick={() =>handleLogOut()}  title='Đăng xuất'>
                 <i className="fas fa-sign-out-alt"></i>
                 </button>

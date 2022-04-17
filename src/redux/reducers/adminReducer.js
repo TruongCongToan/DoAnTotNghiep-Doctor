@@ -1,4 +1,4 @@
-import {ADD_USER_BY_ADMIN,ADD_USER_FROM_TABLE} from '../constant'
+import {ADD_USER_BY_ADMIN,ADD_USER_FROM_TABLE, FETCH_ALLCODE_SCHEDULE_TIME} from '../constant'
 
 const initialState = {
   
@@ -14,7 +14,8 @@ const initialState = {
       role:'R1',
       address:'',
       action:'CREATE'
-    }
+    },
+    allScheduleTime:[]
 
 }
 const adminReducer =(state =initialState, action) => {
@@ -36,6 +37,13 @@ const adminReducer =(state =initialState, action) => {
             
           }
         }
+        case FETCH_ALLCODE_SCHEDULE_TIME:
+          {
+            return{
+              ...state,
+              allScheduleTime:action.payload
+            }
+          }
         
         
         

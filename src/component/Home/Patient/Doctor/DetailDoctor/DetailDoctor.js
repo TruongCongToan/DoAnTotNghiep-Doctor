@@ -4,6 +4,7 @@ import HomeHeader from '../../../Header/HomeHeader';
 import {getDetailInforDoctor} from '../../../../CustomHooks/useFetch'
 
 import './detaidoctor.css';
+import DoctorSchedule from '../DoctorSchedule/DoctorSchedule';
 const DetailDoctor = () => {
   let { id } = useParams();
   const [detailDoctor, setdetailDoctor] = useState({});
@@ -32,7 +33,7 @@ const DetailDoctor = () => {
       }
     }
 }
- console.log("detail doctpr la ",detailDoctor)
+//  console.log("detail doctpr la ",detailDoctor)
   
   return (
     <>
@@ -69,8 +70,14 @@ const DetailDoctor = () => {
                   </div>
               </div>
           </div>
-          <div className='dat-lich-kham'>
-            
+          <div className='schedule-doctor'>
+                <div className='content-left'> 
+                   <DoctorSchedule/>
+                 
+                </div>
+                <div className='content-right'>
+
+                </div>
           </div>
           <div className='chi-tiet-doctor'>
                     {

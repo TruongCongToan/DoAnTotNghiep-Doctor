@@ -86,7 +86,7 @@ const Login = () => {
         // }else{
           
           data.map(item =>{
-            if (item.username === userName && item.password === passWord ) {
+            if (item.email === userName && item.password === passWord ) {
             // history.push("manage-users")
             // user.username= item.username;
             // user.email=item.email;
@@ -129,6 +129,11 @@ const Login = () => {
 
     }, [data]);
 
+    const handleKeyDown = (event) =>{
+      if (event.key ==='Enter') {
+        handleLogin();
+      }
+    }
     return (
         <div className ="login-background">
           
@@ -156,7 +161,8 @@ const Login = () => {
                     className="form-control" 
                     placeholder="Nhập mật khẩu"
                     value={passWord}
-                    onChange ={(event) => handleOnchangeInputPassword(event) }
+                    onChange ={(event) => handleOnchangeInputPassword(event)}
+                    onKeyDown={(event) =>{handleKeyDown(event)}}
                     />
                    <span onClick = {() => handleShowHidePassword()}>
                    <i className={isShowPassword?'far fa-eye':'far fa-eye-slash'}></i>

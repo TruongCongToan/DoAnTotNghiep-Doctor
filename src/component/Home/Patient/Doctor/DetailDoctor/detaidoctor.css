@@ -73,3 +73,16 @@
 .chi-tiet-doctor img{
     width: 100%;
 }
+.schedule-doctor{
+    margin: 0 100px;
+    height: 200px;
+    display: flex;
+    border: 1px solid red;
+
+}
+.schedule-doctor .content-left{
+        width: 50%;
+}
+.schedule-doctor .content-right{
+    width: 50%;
+}
